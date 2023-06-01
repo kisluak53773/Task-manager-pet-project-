@@ -5,6 +5,7 @@ import {
   getProjects,
   createProject,
   deleteProject,
+  dismissFromProject,
 } from "@/app/api/projectAPI";
 
 const initialState = {
@@ -17,6 +18,14 @@ export const addProject = createAsyncThunk(
   "project/create",
   async ({ title, description }) => {
     const project = await createProject(title, description);
+    return project;
+  }
+);
+
+export const dismissProject = createAsyncThunk(
+  "project/dismiss",
+  async ({ userId, projectId }) => {
+    const project = await dismissFromProject(userId, projectId);
     return project;
   }
 );

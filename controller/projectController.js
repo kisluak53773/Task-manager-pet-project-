@@ -1,4 +1,4 @@
-const { Project } = require("../models/models");
+const { Project, User } = require("../models/models");
 const errorHandler = require("../error/errorHandler");
 
 async function createProject(req, res, next) {
@@ -16,7 +16,9 @@ async function createProject(req, res, next) {
 
 async function getProjects(req, res, next) {
   try {
-    const projects = await Project.findAll();
+    const projects = await Project.findAll({
+      include: [User],
+    });
     if (projects.length === 0) {
       return next(
         errorHandler.badRequest("There are no projects to be returned")

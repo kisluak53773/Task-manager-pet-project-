@@ -4,7 +4,6 @@ const errorHandler = require("../error/errorHandler");
 async function appointTask(req, res, next) {
   try {
     const { userId, taskId } = req.body;
-    console.log("userId: " + userId + " taskId: " + taskId);
     await UserTask.create({
       userId,
       taskId,

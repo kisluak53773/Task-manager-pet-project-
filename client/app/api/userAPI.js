@@ -38,3 +38,12 @@ export const findAllUsers = async () => {
   const { data } = await authHost.get("api/user/getAll");
   return data;
 };
+
+export const appointTask = async (userId, projectId) => {
+  console.log("userId" + userId + " projectId" + projectId);
+  const { data } = await authHost.post("api/userProject", {
+    userId,
+    projectId,
+  });
+  return data;
+};

@@ -7,6 +7,7 @@ import { getUser,auth } from "../redux/features/userSlice"
 import {AiOutlinePlus} from "react-icons/ai"
 import Link from "next/link"
 import Project from "./Project"
+import { fetchAllUsers } from "@/app/redux/features/userSlice"
 
 export default function Projects() {
   const projects=useSelector(getAllProjects);
@@ -16,6 +17,7 @@ export default function Projects() {
   useEffect(()=>{
     dispatch(fetchProjects())
     dispatch(auth())
+    dispatch(fetchAllUsers())
   },[dispatch])
 
 

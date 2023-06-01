@@ -10,14 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers,getUser } from "@/app/redux/features/userSlice";
 import DropdownItem from "./DropdownItem";
 import Image from "next/image";
-import { REACT_APP_API_URL } from "@/app/constants"; 
+import { REACT_APP_API_URL,TASK_OPTIONS } from "@/app/constants"; 
 
-const options = [
-    { value: 'Завершено', label: 'Завершено' },
-    { value: 'Выполняется', label: 'Выполняется' },
-    { value: 'Отменено', label: 'Отменено' },
-    { value: 'В процессе обсуждения', label: 'В процессе обсуждения' }
-  ]
   
 
 export default function EditModal({task,isEditActive,setIsEditActive,role}) {
@@ -68,7 +62,7 @@ export default function EditModal({task,isEditActive,setIsEditActive,role}) {
           <>
           <form onSubmit={handleSubmit} className="editForm">
             <div className="editForm__top">
-              <Select className="editForm__top-select" options={options} placeholder={status} onChange={(data)=>setStatus(data.value)}/>
+              <Select className="editForm__top-select" options={TASK_OPTIONS} placeholder={status} onChange={(data)=>setStatus(data.value)}/>
               {JSON.stringify(appointedUser) !== JSON.stringify({}) ? 
               <div style={{marginLeft:"10px", marginTop:"7px"}} className="user user__edit">
                 <Image

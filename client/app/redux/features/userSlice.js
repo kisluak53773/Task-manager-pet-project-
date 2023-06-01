@@ -6,6 +6,7 @@ import {
   registerUser,
   authUser,
   findAllUsers,
+  appointTask,
 } from "@/app/api/userAPI";
 
 const initialState = {
@@ -40,6 +41,14 @@ export const fetchAllUsers = createAsyncThunk(
   "user/fetchAllUsers",
   async () => {
     const data = await findAllUsers();
+    return data;
+  }
+);
+
+export const appointmentToProject = createAsyncThunk(
+  "user/appointProject",
+  async ({ userId, projectId }) => {
+    const data = await appointTask(userId, projectId);
     return data;
   }
 );
@@ -90,6 +99,9 @@ export const userSlice = createSlice({
       state.users = action.payload;
     });
     builder.addCase(fetchAllUsers.rejected, (state, action) => {
+      throw new Error(action.error.message);
+    });
+    builder.addCase(appointmentToProject.rejected, (state, action) => {
       throw new Error(action.error.message);
     });
   },

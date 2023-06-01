@@ -36,6 +36,10 @@ const UserTask = sequelize.define("user_task", {
   status: { type: DataTypes.STRING, defaultValue: "assigned" },
 });
 
+const UserProject = sequelize.define("user_project", {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+});
+
 User.hasMany(UserTask);
 UserTask.belongsTo(User);
 
@@ -45,9 +49,13 @@ UserTask.belongsTo(Task);
 Project.hasMany(Task);
 Task.belongsTo(Project);
 
+User.belongsToMany(Project, { through: "user_project" });
+Project.belongsToMany(User, { through: "user_project" });
+
 module.exports = {
   User,
   Task,
   Project,
   UserTask,
+  UserProject,
 };

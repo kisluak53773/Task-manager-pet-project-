@@ -232,6 +232,9 @@ a {
   &__admin{
     font-size: 14px;
     margin-right: 60px;
+    &:hover{
+      text-decoration: underline;
+    }
   }
 }
 
@@ -256,14 +259,50 @@ a {
     border-radius: 25px;
     background-color: rgba(128, 128, 128, 0.236);
     cursor: pointer;
-    &:hover{
-      background-color: rgba(255, 255, 255, 0.332);
-    }
     &-title{
       display: flex;
       &-deleteSign{
         margin-left: auto;
         color:rgba(243, 67, 67, 0.99);
+        &:hover{
+          color:rgba(245, 125, 125, 0.99);
+        }
+      }
+    }
+    &-users{
+      display: flex;
+      align-items: center;
+      margin-top: 40px;
+      margin-left: 5px;
+      &-image{
+        &:hover::after {
+          content:attr(data-title); 
+          position: absolute; 
+          z-index: 1; 
+          background-color: rgba(128, 128, 128, 0.236);
+          font-family: Arial, sans-serif; 
+          font-size: 11px; 
+          padding: 5px 10px; 
+          border: 1px solid #333; 
+          margin-top: 30px;
+          margin-right: 40px;
+         }
+         &-border{
+          border-radius: 50%;
+        }
+        margin-right: 5px;
+      }
+      &-add{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='100' ry='100' stroke='white' stroke-width='4' stroke-dasharray='10%2c 10' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+border-radius: 100px;
+        &:hover{
+          background-color: rgba(128, 128, 128, 0.236);
+        }
       }
     }
   }

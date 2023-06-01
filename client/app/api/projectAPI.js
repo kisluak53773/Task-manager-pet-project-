@@ -17,3 +17,14 @@ export const deleteProject = async (id) => {
   const { data } = await authHost.delete(`api/project/${id}`);
   return data;
 };
+
+export const dismissFromProject = async (userId, projectId) => {
+  console.log("userId" + userId + " projectId" + projectId);
+  const { data } = await authHost.delete("api/userProject/", {
+    data: {
+      userId,
+      projectId,
+    },
+  });
+  return data;
+};
