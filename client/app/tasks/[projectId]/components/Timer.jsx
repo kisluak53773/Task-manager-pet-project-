@@ -6,17 +6,17 @@ import { useDispatch,useSelector } from 'react-redux';
 import { getUser } from '@/app/redux/features/userSlice';
 
 export default function Timer({taskId,spentTime}) {
-    console.log(spentTime)
     const [start,setStart]=useState(false);
-    const [changedSeconds,setSeconds]=useState(spentTime[2]);
-    const [changedMinutes,setMinutes]=useState(spentTime[1]);
-    const [changedHours,setHours]=useState(spentTime[0]);
-    const seconds=useRef(spentTime[2]);
-    const minutes = useRef(spentTime[1]);
-    const hours=useRef(spentTime[0]);
+    const [changedSeconds,setSeconds]=useState(Number(spentTime[2]));
+    const [changedMinutes,setMinutes]=useState(Number(spentTime[1]));
+    const [changedHours,setHours]=useState(Number(spentTime[0]));
+    const seconds=useRef(Number(spentTime[2]));
+    const minutes = useRef(Number(spentTime[1]));
+    const hours=useRef(Number(spentTime[0]));
     const dispatch=useDispatch()
     const userId=useSelector(getUser).id
 
+    console.log("changed seconds"+changedSeconds+"seconds"+seconds.current)
 
     useEffect(()=>{
         if(start){
@@ -39,7 +39,7 @@ export default function Timer({taskId,spentTime}) {
     
             return ()=>clearInterval(timer)
         }
-    },[start])
+    })
 
     const handleStart=useCallback(()=>{
         setStart(true)
@@ -58,7 +58,7 @@ export default function Timer({taskId,spentTime}) {
     <div className='timer'>
         <h1>Фиксация времени</h1>
         <div className='timer__time'>
-            <h1>{changedHours<10 ? "0"+changedHours : changedHours}:{changedMinutes<10 ? "0"+changedMinutes : changedMinutes}:{changedSeconds<10 ? "0"+changedSeconds : changedSeconds}</h1>
+            <h1>{(changedHours < 10) ? ("0"+changedHours) : changedHours}:{(changedMinutes<10) ? ("0"+changedMinutes) : changedMinutes}:{(changedSeconds<10) ? ("0"+changedSeconds) : changedSeconds}</h1>
         </div>
         <div className='timer__buttons'>
             <button onClick={handleStart} className='timer__buttons-start'>Начать</button>

@@ -49,7 +49,7 @@ export default function Project({project,role}) {
 
   return (
     <>
-    {isUserAppointed | role==="ADMIN" && <Link href={`/tasks/${project.id}/`} className="projects__item">
+    {(isUserAppointed || role==="ADMIN") && (<Link href={`/tasks/${project.id}/`} className="projects__item">
         <div className="projects__item-title">
           <h1>{project.title} </h1> 
           {role==="ADMIN" && <AiOutlineDelete size="2rem" onClick={handleDelete} className="projects__item-title-deleteSign"/>}
@@ -76,7 +76,7 @@ export default function Project({project,role}) {
         )} 
          </div>
         }
-    </Link>}
+    </Link>)}
     </>
   )
 }
