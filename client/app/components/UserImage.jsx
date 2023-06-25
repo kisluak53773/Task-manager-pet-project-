@@ -2,11 +2,10 @@
 
 import { REACT_APP_API_URL } from "@/app/constants"; 
 import Image from "next/image";
-import { memo } from "react";
 import { useDispatch } from "react-redux";
 import { dismissProject } from "../redux/features/projectSlice";
 
-const UserImage=memo(({user,projectId})=>{
+const UserImage = ({user,projectId}) => {
     const src=()=>REACT_APP_API_URL+user.img
     const dispatch=useDispatch()
 
@@ -28,6 +27,6 @@ const UserImage=memo(({user,projectId})=>{
     />
     </div>
   )
-})
+}
 
 export default UserImage

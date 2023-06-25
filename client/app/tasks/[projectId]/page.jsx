@@ -14,3 +14,5 @@ export default function TasksPage({params:{projectId}}) {
     </main>
   )
 }
+
+export const revalidate = 60

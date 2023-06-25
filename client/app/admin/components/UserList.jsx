@@ -37,7 +37,7 @@ export default function UserList() {
             </div>
             <div className="modifiedTasks__item-list">
             {task.users.map((user)=>
-            <ul style={{listStyle:"none"}}>
+            <ul key={user.id} style={{listStyle:"none"}}>
             <UserItem key={user.id} user={user}/>
             </ul>)}
             </div>
