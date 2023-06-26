@@ -3,11 +3,10 @@
 import { useEffect } from "react"
 import { useSelector,useDispatch } from "react-redux"
 import { getAllProjects,fetchProjects } from "../redux/features/projectSlice"
-import { getUser,auth } from "../redux/features/userSlice"
+import { getUser,auth,fetchAllUsers } from "../redux/features/userSlice"
 import {AiOutlinePlus} from "react-icons/ai"
 import Link from "next/link"
 import Project from "./Project"
-import { fetchAllUsers } from "@/app/redux/features/userSlice"
 
 export default function Projects() {
   const projects=useSelector(getAllProjects);
@@ -32,3 +31,5 @@ export default function Projects() {
     </section>
   )
 }
+
+export const revalidate = 1;

@@ -35,3 +35,5 @@ export default function Tasks({projectId}) {
     </section>
   )
 }
+
+export const revalidate = 1;

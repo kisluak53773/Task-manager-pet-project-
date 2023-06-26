@@ -1,9 +1,9 @@
 "use client"
 
 import { useCallback,useState } from "react";
-import {RxCrossCircled} from "react-icons/rx"
-import {set, useForm} from "react-hook-form"
-import { addTask } from "@/app/redux/features/taskSlice";
+import { RxCrossCircled } from "react-icons/rx"
+import { useForm } from "react-hook-form"
+import { addTask,fetchTasksByProjectId } from "@/app/redux/features/taskSlice";
 import { useDispatch } from "react-redux";
 import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
 
@@ -17,7 +17,9 @@ export default function AddModal({isAddActive,setIsAddActive,projectId}) {
       }, [isAddActive]);
 
     const onSubmit=(data)=>{
-      dispatch(addTask({id:projectId,...data,endDate:date}))
+      dispatch(addTask({id:projectId,...data,endDate:date})).then( () => {
+        dispatch(fetchTasksByProjectId({projectId}))
+      })
       onDismiss();
       reset();
     }

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { RxCrossCircled } from "react-icons/rx"
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form"
-import { addProject } from "@/app/redux/features/projectSlice";
+import { addProject, fetchProjects } from "@/app/redux/features/projectSlice";
 
 export default function ProjectModal() {
     const router=useRouter();
@@ -16,7 +16,9 @@ export default function ProjectModal() {
     }
 
     const onSubmit=(data,e)=>{
-      dispatch(addProject(data))
+      dispatch(addProject(data)).then( () => {
+        dispatch(fetchProjects())
+      })
       reset();
       onDismiss();
     }

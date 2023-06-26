@@ -58,9 +58,9 @@ export default function Project({project,role}) {
         </div>
         <p>{project.description}</p>
         {project.users.length !==0 &&
-         <div className="projects__item-users">
-         {project.users.map((user)=>{
-          return(
+        <div className="projects__item-users">
+        {project.users.map((user)=>{
+         return(
             <>
               <UserImage key={user.id} projectId={project.id} user={user}/>
             </>
