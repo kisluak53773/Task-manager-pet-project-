@@ -37,7 +37,9 @@ export default function Project({project,role}) {
     const isUserAppointed=useMemo(userAppointed,[user,project])
     const filteredUsers=useMemo(filterUsers,[users,project])
 
-    const handleDelete = useCallback(()=>{
+    const handleDelete = useCallback((e)=>{
+      e.preventDefault();
+      e.stopPropagation();
       dispatch(setBeingDeleted(project.id))  
       dispatch(destroyProject({id:project.id}))
     },[dispatch]);
