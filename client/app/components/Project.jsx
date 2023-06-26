@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback,useState,useMemo } from "react"
+import { useState,useMemo } from "react"
 import { useDispatch,useSelector } from "react-redux"
 import { destroyProject,setBeingDeleted } from "../redux/features/projectSlice"
 import {AiOutlineDelete} from "react-icons/ai"
@@ -12,18 +12,18 @@ import DropdownItem from "./DropDownItem"
 
 
 export default function Project({project,role}) {
-    const dispatch=useDispatch()
-    const [dropdown,setDropdown]=useState(false)
-    const users=useSelector(getAllUsers)
+    const dispatch = useDispatch()
+    const [dropdown,setDropdown] = useState(false)
+    const users = useSelector(getAllUsers)
     const user = useSelector(getUser)
 
-    const filterUsers=()=>{
-      var filtered=[...users]
-     for(const user of project.users){
-      const data=filtered.filter(userPicked=>userPicked.id !== user.id)
-      filtered=data
-     }
-     return filtered
+    const filterUsers = () => {
+      let filtered = [...users]
+      for(const user of project.users){
+       const data = filtered.filter(userPicked=>userPicked.id !== user.id)
+       filtered = data
+      }
+      return filtered
     }
 
     const userAppointed=()=>{
@@ -34,20 +34,20 @@ export default function Project({project,role}) {
       }
     }
 
-    const isUserAppointed=useMemo(userAppointed,[user,project])
-    const filteredUsers=useMemo(filterUsers,[users,project])
+    const isUserAppointed= userAppointed()
+    const filteredUsers= filterUsers()
 
-    const handleDelete = useCallback((e)=>{
+    const handleDelete = (e)=>{
       e.preventDefault();
       e.stopPropagation();
       dispatch(setBeingDeleted(project.id))  
       dispatch(destroyProject({id:project.id}))
-    },[dispatch]);
+    }
 
-    const handleDropDown=useCallback((e) => {
+    const handleDropDown = (e) => {
       e.preventDefault()
       setDropdown(!dropdown)
-    },[dropdown])
+    }
 
   return (
     <>

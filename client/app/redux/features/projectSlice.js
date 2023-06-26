@@ -63,9 +63,6 @@ export const projectSlice = createSlice({
       state.isLoading = false;
       throw new Error(action.error.message);
     });
-    builder.addCase(addProject.fulfilled, (state, action) => {
-      state.projects.push(action.payload);
-    });
     builder.addCase(addProject.rejected, (state, action) => {
       throw new Error(action.error.message);
     });

@@ -1,25 +1,24 @@
 "use client"
 
-import { useCallback } from "react";
-import {RxCrossCircled} from "react-icons/rx"
-import { useRouter } from "next/navigation";
-import {useForm} from "react-hook-form"
-import { addProject } from "@/app/redux/features/projectSlice";
 import { useDispatch } from "react-redux";
+import { RxCrossCircled } from "react-icons/rx"
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form"
+import { addProject } from "@/app/redux/features/projectSlice";
 
 export default function ProjectModal() {
     const router=useRouter();
     const {register,handleSubmit,formState:{errors},reset}=useForm({mode:"onChange"})
     const dispatch = useDispatch()
 
-    const onDismiss = useCallback(() => {
-        router.back();
-      }, [router]);
+    const onDismiss = () => {
+      router.back();
+    }
 
-    const onSubmit=(data)=>{
+    const onSubmit=(data,e)=>{
       dispatch(addProject(data))
-      onDismiss();
       reset();
+      onDismiss();
     }
 
   return (
