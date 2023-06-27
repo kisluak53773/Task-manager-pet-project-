@@ -31,5 +31,3 @@ export default function Projects() {
     </section>
   )
 }
-
-export const revalidate = 1;

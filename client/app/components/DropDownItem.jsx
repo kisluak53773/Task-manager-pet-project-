@@ -2,6 +2,7 @@
 
 import { useDispatch } from "react-redux"
 import { appointmentToProject } from "../redux/features/userSlice"
+import { fetchProjects } from "../redux/features/projectSlice"
 
 export default function DropdownItem({user,setDropdown,project}) {
   const dispatch=useDispatch()
@@ -10,7 +11,9 @@ export default function DropdownItem({user,setDropdown,project}) {
     e.preventDefault()
     e.stopPropagation()
     setDropdown(false)
-    dispatch(appointmentToProject({ userId:user.id, projectId:project.id }))
+    dispatch(appointmentToProject({ userId:user.id, projectId:project.id })).then(() => {
+      dispatch(fetchProjects())
+    })
   }
 
   return (

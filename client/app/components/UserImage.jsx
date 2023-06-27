@@ -3,7 +3,7 @@
 import { REACT_APP_API_URL } from "@/app/constants"; 
 import Image from "next/image";
 import { useDispatch } from "react-redux";
-import { dismissProject } from "../redux/features/projectSlice";
+import { dismissProject, fetchProjects } from "../redux/features/projectSlice";
 import { fetchAllUsers } from "@/app/redux/features/userSlice"
 
 const UserImage = ({user,projectId}) => {
@@ -14,7 +14,7 @@ const UserImage = ({user,projectId}) => {
       e.preventDefault()
       e.stopPropagation()
       dispatch(dismissProject({userId:user.id,projectId})).then(() => {
-        dispatch(fetchAllUsers());
+        dispatch(fetchProjects());
       })
     }
 

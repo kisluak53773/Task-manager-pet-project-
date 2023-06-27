@@ -259,6 +259,7 @@ a {
     border-radius: 25px;
     background-color: rgba(128, 128, 128, 0.236);
     cursor: pointer;
+    z-index: 1;
     &-title{
       display: flex;
       &-deleteSign{
@@ -540,7 +541,7 @@ border-radius: 100px;
 
 .dropdown{
   position: absolute;
-  z-index: 10;
+  z-index: 999;
   list-style: none;
   background-color: rgba(128, 128, 128, 0.941);
   margin-left: 10px;

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState,useMemo } from "react"
+import { useState } from "react"
 import { useDispatch,useSelector } from "react-redux"
 import { destroyProject,setBeingDeleted } from "../redux/features/projectSlice"
 import {AiOutlineDelete} from "react-icons/ai"
@@ -57,27 +57,25 @@ export default function Project({project,role}) {
           {role==="ADMIN" && <AiOutlineDelete size="2rem" onClick={handleDelete} className="projects__item-title-deleteSign"/>}
         </div>
         <p>{project.description}</p>
-        {project.users.length !==0 &&
         <div className="projects__item-users">
-        {project.users.map((user)=>{
-         return(
+          {project.users.map((user)=>{
+           return(
+              <>
+                <UserImage key={user.id} projectId={project.id} user={user}/>
+              </>
+            )
+          })}
+          {(project.users.length <6  && role==="ADMIN")  && (
             <>
-              <UserImage key={user.id} projectId={project.id} user={user}/>
+              <span onClick={handleDropDown} className="projects__item-users-add"><AiOutlinePlus/></span>
+              <div>
+                <ul className={dropdown ? "dropdown" : "dropdown dropdown__hidden"}>
+                  {filteredUsers.map(user=><DropdownItem key={user.id} user={user} setDropdown={setDropdown} project={project}/>)}
+                </ul>
+              </div>
             </>
-          )
-        })}
-        {project.users.length <6 && role==="ADMIN"  && (
-          <>
-            <span onClick={handleDropDown} className="projects__item-users-add"><AiOutlinePlus/></span>
-            <div>
-              <ul className={dropdown ? "dropdown" : "dropdown dropdown__hidden"}>
-                {filteredUsers.map(user=><DropdownItem key={user.id} user={user} setDropdown={setDropdown} project={project}/>)}
-              </ul>
-            </div>
-          </>
-        )} 
-         </div>
-        }
+          )} 
+        </div>
     </Link>)}
     </>
   )

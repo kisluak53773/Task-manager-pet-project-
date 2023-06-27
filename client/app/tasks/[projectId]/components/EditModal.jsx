@@ -5,7 +5,7 @@ import {RxCrossCircled} from "react-icons/rx"
 import Select from 'react-select'
 import ProgressBar from "./ProgressBar"; 
 import Timer from "./Timer";
-import { modifyTask,getAppointedUser,dismiss } from "@/app/redux/features/taskSlice";
+import { modifyTask,getAppointedUser,dismiss,fetchTasksByProjectId } from "@/app/redux/features/taskSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers,getUser } from "@/app/redux/features/userSlice";
 import DropdownItem from "./DropdownItem";
@@ -14,7 +14,7 @@ import { REACT_APP_API_URL,TASK_OPTIONS } from "@/app/constants";
 
   
 
-export default function EditModal({task,isEditActive,setIsEditActive,role}) {
+export default function EditModal({task,isEditActive,setIsEditActive,role,projectId}) {
     const [progress,setProgress]=useState(task.progress);
     const [status,setStatus]=useState(task.status);
     const [name,setName]=useState(task.name);
@@ -49,10 +49,12 @@ export default function EditModal({task,isEditActive,setIsEditActive,role}) {
       setDropdown(!dropdown)
     },[dropdown])
 
-    const handleDismiss=useCallback(e=>{
+    const handleDismiss = (e) =>{
       e.preventDefault()
-      dispatch(dismiss({ taskId:task.id, userId:appointedUser.id }))
-    },[appointedUser])
+      dispatch(dismiss({ taskId:task.id, userId:appointedUser.id })).then(() =>{
+        dispatch(fetchTasksByProjectId({projectId}))
+      });
+    }
 
   return (
     <div className={isEditActive ? "modal" : "modal modal_disabled"}>
@@ -81,7 +83,7 @@ export default function EditModal({task,isEditActive,setIsEditActive,role}) {
                 <button onClick={handleDropDown} className="editForm__top-button">Назначить задачу</button>
                 <div>
                   <ul className={dropdown ? "dropdown" : "dropdown dropdown__hidden"}>
-                    {users.map(user=><DropdownItem key={user.id} user={user} setDropdown={setDropdown} taskId={task.id}/>)}
+                    {users.map(user=><DropdownItem key={user.id} projectId={projectId} user={user} setDropdown={setDropdown} taskId={task.id}/>)}
                   </ul>
                 </div>
               </div>}

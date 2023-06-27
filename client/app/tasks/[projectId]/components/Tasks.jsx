@@ -27,7 +27,7 @@ export default function Tasks({projectId}) {
         <AddModal isAddActive={isAddActive} setIsAddActive={setIsAddActive} projectId={projectId}/>
         <h1>Задачи</h1>
         {filteredTasks.length>0  ? filteredTasks.map((task)=>{
-            return <Task key={task.id} role={role} task={task} />
+            return <Task key={task.id} role={role} projectId={projectId} task={task} />
         }) : (
             <h1>Задачи отсутствуют</h1>
         )}
@@ -36,4 +36,4 @@ export default function Tasks({projectId}) {
   )
 }
 
-export const revalidate = 1;
+export const revalidate = 60;
